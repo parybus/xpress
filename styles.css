@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
 
 :root {
-  --bg: #fffaf5;
-  --bg-strong: #fdf2e9;
+  --bg: #ffffff;
+  --bg-strong: #f9f9f9;
   --surface: #ffffff;
-  --text: #1a1a1a;
-  --muted: #666666;
-  --accent: #d4af37;
-  --accent-hover: #b8860b;
-  --accent-2: #222222;
-  --stroke: #e5e5e5;
+  --text: #000000;
+  --muted: #555555;
+  --accent: #222222;
+  --accent-hover: #444444;
+  --accent-2: #000000;
+  --stroke: #e0e0e0;
   --radius: 18px;
   --shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
   --transition: all 0.3s ease;
@@ -30,8 +30,8 @@ body {
   font-family: Manrope, "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 80% -10%, #fff3d4 0, transparent 45%),
-    radial-gradient(circle at 10% 0%, #fff9f0 0, transparent 40%),
+    radial-gradient(circle at 80% -10%, #f5f5f5 0, transparent 45%),
+    radial-gradient(circle at 10% 0%, #fafafa 0, transparent 40%),
     var(--bg);
   line-height: 1.5;
 }
@@ -87,7 +87,7 @@ body {
   text-decoration: none;
   cursor: pointer;
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   transition: 0.2s ease;
 }
 
@@ -98,29 +98,29 @@ body {
 
 .btn-pulse {
   animation: pulse-promo 2s infinite;
-  background: linear-gradient(45deg, var(--accent), #f1c40f);
+  background: linear-gradient(45deg, var(--accent), var(--accent-2));
 }
 
 .btn-pulse:hover {
   animation: none;
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes pulse-promo {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
   }
 
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+    box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
   }
 
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
 
@@ -159,7 +159,7 @@ body {
   transform: translate(-50%, -50%);
   width: 140%;
   height: 130%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, transparent 65%);
   z-index: -1;
   pointer-events: none;
 }
@@ -170,7 +170,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  background: #ffffff99;
+  background: #ffffff;
   border: 1px solid var(--stroke);
   border-radius: 24px;
   padding: 12px 24px;
@@ -188,7 +188,7 @@ body {
 .hero-rating-badge .rating-stars {
   display: flex;
   gap: 4px;
-  color: #f59e0b;
+  color: var(--accent);
 }
 
 .hero-rating-badge .rating-stars svg {
@@ -273,12 +273,11 @@ h2 {
 }
 
 .hero-action-badge {
-  position: absolute;
   top: 16px;
   right: 16px;
   z-index: 10;
-  background: #ffec3d;
-  color: #111;
+  background: #000;
+  color: #fff;
   font-weight: 800;
   padding: 6px 14px;
   border-radius: 12px;
@@ -302,7 +301,7 @@ h2 {
 .hero-price {
   max-width: 100%;
   margin-bottom: 0;
-  box-shadow: 0 8px 24px rgba(34, 24, 56, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .hero-price .price-label {
@@ -320,7 +319,7 @@ h2 {
 }
 
 .layer-1 {
-  background: linear-gradient(145deg, #111111, #d4af37);
+  background: linear-gradient(145deg, var(--accent-2), var(--accent));
 }
 
 .layer-2 {
@@ -333,7 +332,7 @@ h2 {
   position: relative;
   z-index: 1;
   padding: 30px;
-  color: #f6fffd;
+  color: var(--bg);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -383,15 +382,15 @@ h2 {
 
 .features article:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(226, 82, 162, 0.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
   border-color: var(--accent);
 }
 
 .feature-icon {
   width: 48px;
   height: 48px;
-  background: rgba(212, 175, 55, 0.1);
-  color: var(--accent);
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -443,7 +442,7 @@ h2 {
 .review-card:hover {
   transform: translateY(-4px);
   border-color: var(--accent);
-  box-shadow: 0 10px 24px rgba(226, 82, 162, 0.1);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
 }
 
 .review-header {
@@ -457,8 +456,8 @@ h2 {
   height: 44px;
   min-width: 44px;
   border-radius: 50%;
-  background: rgba(212, 175, 55, 0.1);
-  color: var(--accent);
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text);
   font-weight: 800;
   font-size: 1.1rem;
   display: flex;
@@ -482,7 +481,7 @@ h2 {
 .review-stars {
   display: flex;
   gap: 3px;
-  color: #f59e0b;
+  color: var(--accent);
 }
 
 .review-stars svg {
@@ -555,21 +554,21 @@ h2 {
   width: 32px;
   height: 32px;
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
   font-size: 1.1rem;
-  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .step-icon {
   width: 48px;
   height: 48px;
-  background: rgba(212, 175, 55, 0.1);
-  color: var(--accent);
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -650,7 +649,7 @@ h2 {
   border-radius: 999px;
   overflow: hidden;
   margin-bottom: 24px;
-  border: 1px solid #ddd5e8;
+  border: 1px solid var(--stroke);
   text-align: center;
 }
 
@@ -675,12 +674,12 @@ h2 {
 }
 
 .old-price {
-  background: white;
+  background: var(--surface);
 }
 
 .old-price .price-label,
 .old-price .price-value {
-  color: #111;
+  color: var(--text);
 }
 
 .old-price .price-value {
@@ -696,7 +695,7 @@ h2 {
 
 .new-price .price-label,
 .new-price .price-value {
-  color: #fff;
+  color: var(--bg);
 }
 
 .new-price .price-label {
@@ -722,7 +721,7 @@ h2 {
   padding: 0.75rem 0.85rem;
   font: inherit;
   color: var(--text);
-  background: #fff;
+  background: var(--surface);
   margin-bottom: 18px;
 }
 
@@ -732,7 +731,7 @@ h2 {
   border: none;
   border-radius: 48px;
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
   font-weight: 600;
   padding: 1rem;
   font-size: 1.2rem;
@@ -741,7 +740,7 @@ h2 {
 }
 
 .order-form button:hover {
-  background: #c63b88;
+  background: #333333;
   transform: translateY(-1px);
 }
 
@@ -756,17 +755,17 @@ h2 {
   content: "";
   position: absolute;
   inset: 0;
-  background: url('assets/bg-mascara.png') center/cover no-repeat;
+  background: url('assets/bg-d.webp') center/cover no-repeat;
   opacity: 0.8;
   -webkit-mask-image: linear-gradient(to bottom,
       transparent 0%,
-      #000 28%,
-      #000 72%,
+      var(--text) 28%,
+      var(--text) 72%,
       transparent 100%);
   mask-image: linear-gradient(to bottom,
       transparent 0%,
-      #000 28%,
-      #000 4%,
+      var(--text) 28%,
+      var(--text) 4%,
       transparent 100%);
   pointer-events: none;
 }
@@ -779,7 +778,7 @@ h2 {
 .partners h2 {
   text-align: center;
   margin-bottom: 24px;
-  color: #fff;
+  color: var(--bg);
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
 }
 
@@ -787,7 +786,7 @@ h2 {
   text-align: center;
   margin: 0 auto 48px;
   max-width: 62ch;
-  color: #fff;
+  color: var(--bg);
   font-weight: 600;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.8);
 }
@@ -807,7 +806,7 @@ h2 {
   transition: var(--transition);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 12px 28px rgba(34, 24, 56, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   border: 1px solid var(--stroke);
@@ -816,7 +815,7 @@ h2 {
 
 .partner-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
 }
 
 .partner-logo-box {
@@ -825,7 +824,7 @@ h2 {
   justify-content: center;
   align-items: center;
   margin-bottom: 24px;
-  background: #fff;
+  background: var(--bg);
   border-radius: 16px;
   padding: 20px;
 }
@@ -876,7 +875,7 @@ h2 {
 }
 
 .novaposhta-card {
-  background: linear-gradient(180deg, rgba(237, 28, 36, 0.1) 0%, rgba(255, 255, 255, 0.94) 42%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, var(--surface) 42%);
   color: var(--text);
 }
 
@@ -890,24 +889,24 @@ h2 {
 }
 
 .novaposhta-card ul li::before {
-  color: #fff;
-  background: #d81921;
-  box-shadow: 0 4px 10px rgba(216, 25, 33, 0.25);
+  color: var(--bg);
+  background: #000000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .novaposhta-card .btn {
-  background-color: #d81921;
-  color: #fff;
-  border-color: #d81921;
+  background-color: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
 }
 
 .novaposhta-card .btn:hover {
-  background-color: #b60f16;
-  color: #fff;
+  background-color: var(--accent-hover);
+  color: var(--bg);
 }
 
 .ukrposhta-card {
-  background: linear-gradient(180deg, rgba(255, 204, 0, 0.18) 0%, rgba(255, 255, 255, 0.95) 42%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.03) 0%, var(--surface) 42%);
   color: var(--text);
 }
 
@@ -920,21 +919,21 @@ h2 {
 }
 
 .ukrposhta-card ul li::before {
-  color: #fff;
-  background: #0033a0;
-  box-shadow: 0 4px 10px rgba(0, 51, 160, 0.24);
+  color: var(--bg);
+  background: #333333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .ukrposhta-card .btn {
-  background-color: #0033a0;
-  color: #fff;
-  border-color: #0033a0;
+  background-color: var(--accent-2);
+  color: var(--bg);
+  border-color: var(--accent-2);
 }
 
 .ukrposhta-card .btn:hover {
-  background-color: #002a83;
-  color: #ffffff;
-  border-color: #002a83;
+  background-color: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
 }
 
 .partner-cta {
@@ -986,7 +985,7 @@ h2 {
   padding: 10px 8px;
   border-radius: 14px;
   border: 1px solid var(--stroke);
-  box-shadow: 0 4px 12px rgba(34, 24, 56, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .time-block span:first-child {
@@ -1007,8 +1006,8 @@ h2 {
 }
 
 .site-footer {
-  background: #211b31;
-  color: #f7f2ff;
+  background: var(--text);
+  color: var(--bg);
   padding: 34px 0;
 }
 
@@ -1074,8 +1073,8 @@ h2 {
 .benefit-card .card-icon {
   width: 44px;
   height: 44px;
-  background: rgba(226, 82, 162, 0.1);
-  color: var(--accent);
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text);
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -1114,12 +1113,12 @@ h2 {
   position: absolute;
   bottom: 20px;
   right: -20px;
-  background: #ffec3d;
-  color: #111;
+  background: var(--accent);
+  color: var(--bg);
   padding: 12px 24px;
   border-radius: 48px;
   font-weight: 700;
-  box-shadow: 0 10px 20px rgba(226, 82, 162, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
@@ -1127,8 +1126,8 @@ h2 {
 
 .media-accent:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 30px rgba(226, 82, 162, 0.4);
-  background: #ffef61;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  background: var(--accent-hover);
 }
 
 .benefits-section {
@@ -1191,8 +1190,8 @@ h2 {
   width: 28px;
   height: 28px;
   flex: 0 0 28px;
-  background: rgba(226, 82, 162, 0.1);
-  color: var(--accent);
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1224,7 +1223,7 @@ h2 {
 
 .confidence-section {
   padding: 64px 0 0;
-  background: radial-gradient(ellipse 100% 70% at 50% 50%, rgba(170, 140, 200, 0.15) 0%, transparent 85%);
+  background: radial-gradient(ellipse 100% 70% at 50% 50%, rgba(0, 0, 0, 0.02) 0%, transparent 85%);
 }
 
 .confidence-grid {
@@ -1251,7 +1250,7 @@ h2 {
 
 .helps-section {
   padding: 64px 0;
-  background: radial-gradient(ellipse 100% 70% at 50% 50%, #f7f2ff 15%, transparent 85%);
+  background: radial-gradient(ellipse 100% 70% at 50% 50%, var(--bg-strong) 15%, transparent 85%);
 }
 
 .helps-grid {
@@ -1263,7 +1262,7 @@ h2 {
 
 .size-guide-section {
   padding: 24px 0;
-  background: radial-gradient(ellipse 100% 70% at 50% 50%, #ffffff 15%, transparent 85%);
+  background: radial-gradient(ellipse 100% 70% at 50% 50%, var(--bg) 15%, transparent 85%);
 }
 
 .size-guide-grid {
@@ -1289,7 +1288,7 @@ h2 {
   padding: 24px;
   margin-bottom: 24px;
   border: 1px solid var(--stroke);
-  box-shadow: 0 4px 12px rgba(34, 24, 56, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .size-table {
