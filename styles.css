@@ -28,8 +28,8 @@ body {
   font-family: Manrope, "Segoe UI", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 80% -10%, #f5f5f5 0, transparent 45%),
-    radial-gradient(circle at 10% 0%, #fafafa 0, transparent 40%),
+    radial-gradient(circle at 80% 1200px, #ffffff 0, transparent 45%),
+    radial-gradient(circle at 10% 1800px, #fafafa 0, transparent 40%),
     var(--bg);
   line-height: 1.5;
 }
@@ -46,6 +46,7 @@ body {
   backdrop-filter: blur(8px);
   background: rgba(248, 244, 251, 0.16);
   border-bottom: 1px solid rgba(216, 204, 232, 0.6);
+  margin-bottom: -73px;
 }
 
 .header-wrap {
@@ -132,9 +133,9 @@ body {
 
 .hero {
   position: relative;
-  padding: clamp(24px, 4vw, 56px) 0 44px;
+  padding: clamp(96px, 12vw, 130px) 0 44px;
   overflow: hidden;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 40%, transparent 80%), url('assets/hero.webp') center/cover no-repeat;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 10%, transparent 80%), url('assets/hero.webp') left/contain no-repeat;
 }
 
 .hero::after {
