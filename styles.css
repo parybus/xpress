@@ -135,7 +135,7 @@ body {
   position: relative;
   padding: clamp(96px, 12vw, 130px) 0 44px;
   overflow: hidden;
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 10%, transparent 80%), url('assets/hero.webp') left/contain no-repeat;
+  background: linear-gradient(to left, #ffffff 56%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 0.3) 100%), url('assets/hero.webp') left/contain no-repeat;
 }
 
 .hero::after {
