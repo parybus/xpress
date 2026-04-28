@@ -203,6 +203,7 @@
           </div>
         </div>
         <div class="recovery-media">
+          <canvas id="circle-mascara-canvas"></canvas>
           <img src="assets/v-1.webp" alt="Результат використання Vibely 4D" />
           <a class="media-accent" href="#order">Будь впевненою у своєму погляді</a>
         </div>
@@ -850,6 +851,95 @@
       }, { threshold: 0 });
 
       observer.observe(document.querySelector('.hero'));
+
+      // Circle Mascara Animation for recovery-media
+      const circleCanvas = document.getElementById("circle-mascara-canvas");
+      if (circleCanvas) {
+        const cCtx = circleCanvas.getContext("2d");
+        let cw, ch;
+        const cResize = () => {
+          cw = circleCanvas.width = circleCanvas.offsetWidth * window.devicePixelRatio;
+          ch = circleCanvas.height = circleCanvas.offsetHeight * window.devicePixelRatio;
+          cCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        };
+        window.addEventListener("resize", cResize);
+        cResize();
+
+        let circleProgress = 0;
+        let circleAnimationId;
+        let isCircleVisible = false;
+
+        let bristles = [];
+        function generateBristles() {
+          bristles = [];
+          const cIsMobile = window.innerWidth < 768;
+          const thickness = ((cIsMobile ? 20 : 35) + Math.random() * (cIsMobile ? 20 : 45)) * 0.6;
+          const numBristles = (cIsMobile ? 8 : 15) + Math.floor(Math.random() * (cIsMobile ? 10 : 20));
+          for (let i = 0; i < numBristles; i++) {
+            bristles.push({
+              ox: (Math.random() - 0.5) * thickness,
+              oy: (Math.random() - 0.5) * thickness,
+              t: 1 + Math.random() * 4, 
+              a: 0.1 + Math.random() * 0.3 
+            });
+          }
+        }
+        generateBristles();
+
+        function animateCircle() {
+          if (!isCircleVisible) return;
+          cCtx.clearRect(0, 0, circleCanvas.width, circleCanvas.height);
+          
+          circleProgress += 0.015; 
+          if (circleProgress > Math.PI * 2 + 4.0) { 
+            circleProgress = 0;
+            generateBristles(); 
+          }
+          
+          const cx = circleCanvas.offsetWidth / 2;
+          const cy = circleCanvas.offsetHeight / 2;
+          const radius = Math.min(cx, cy) - 15; 
+          const drawnAngle = Math.min(circleProgress, Math.PI * 2);
+
+          if (drawnAngle > 0) {
+            for (let b of bristles) {
+              cCtx.beginPath();
+              for (let a = 0; a <= drawnAngle; a += 0.05) {
+                let r = radius;
+                let x = cx + Math.cos(a - Math.PI / 2) * r; 
+                let y = cy + Math.sin(a - Math.PI / 2) * r;
+                if (a === 0) cCtx.moveTo(x + b.ox, y + b.oy);
+                else cCtx.lineTo(x + b.ox, y + b.oy);
+              }
+              const fade = circleProgress > Math.PI * 2 ? Math.max(0, 1 - (circleProgress - Math.PI * 2) / 1.5) : 1;
+              cCtx.strokeStyle = `rgba(15, 10, 10, ${b.a * fade})`;
+              cCtx.lineWidth = b.t;
+              cCtx.lineCap = 'round';
+              cCtx.lineJoin = 'round';
+              cCtx.stroke();
+            }
+          }
+
+          circleAnimationId = requestAnimationFrame(animateCircle);
+        }
+
+        const cObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              if (!isCircleVisible) {
+                isCircleVisible = true;
+                circleProgress = 0;
+                animateCircle();
+              }
+            } else {
+              isCircleVisible = false;
+              if (circleAnimationId) cancelAnimationFrame(circleAnimationId);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        cObserver.observe(circleCanvas);
+      }
     });
   </script>
 </body>

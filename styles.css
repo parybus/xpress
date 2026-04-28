@@ -22,6 +22,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -1256,6 +1257,16 @@ h2 {
 
 .recovery-media {
   position: relative;
+}
+
+#circle-mascara-canvas {
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 140px;
+  height: 140px;
+  z-index: 10;
+  pointer-events: none;
 }
 
 .recovery-media img {
