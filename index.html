@@ -58,7 +58,7 @@
           </div>
           <p class="eyebrow">МАКСИМАЛЬНИЙ ОБ'ЄМ ТА ПОДОВЖЕННЯ</p>
           <h1 class="hero-desktop-title">Vibely 4D Xpress Control</h1>
-          <p class="ideal-text">Будь чарівною!</p>
+          <p class="ideal-text">Інноваційна туш для вій!</p>
           <p class="lead">Твоя ідеальна туш для неймовірного об'єму та довжини!</p>
           <div class="hero-actions">
             <a class="btn btn-pulse" href="#order">Замовити зі знижкою -50%</a>
@@ -732,7 +732,7 @@
         reset() {
           const canvasW = canvas.offsetWidth;
           const canvasH = canvas.offsetHeight;
-          
+
           if (Math.random() > 0.5) {
             this.sx = Math.random() < 0.5 ? -100 : canvasW + 100;
             this.sy = Math.random() * canvasH;
@@ -755,7 +755,7 @@
           this.delay = 0;
 
           const isMobile = window.innerWidth < 768;
-          this.thickness = (isMobile ? 20 : 35) + Math.random() * (isMobile ? 20 : 45); 
+          this.thickness = (isMobile ? 20 : 35) + Math.random() * (isMobile ? 20 : 45);
 
           this.bristles = [];
           const numBristles = (isMobile ? 8 : 15) + Math.floor(Math.random() * (isMobile ? 10 : 20));
@@ -848,7 +848,7 @@
           }
         });
       }, { threshold: 0 });
-      
+
       observer.observe(document.querySelector('.hero'));
     });
   </script>
