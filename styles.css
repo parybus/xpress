@@ -1573,8 +1573,14 @@ h2 {
     width: 100%;
   }
 
+  .hero-actions {
+    justify-content: center;
+
+  }
+
   .hero-card {
-    min-height: 260px;
+    margin: 0 auto;
+    min-width: 480px;
   }
 
   .features {
@@ -1712,6 +1718,10 @@ h2 {
 
   .hero-actions .btn-pulse {
     width: 100%;
+  }
+
+  .hero-card {
+    min-height: 260px;
   }
 }
 
