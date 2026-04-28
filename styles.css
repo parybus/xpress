@@ -257,6 +257,13 @@ h2 {
   margin: 26px 0;
 }
 
+.hero-media-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  perspective: 1000px;
+}
+
 .hero-card {
   display: block;
   text-decoration: none;
@@ -266,12 +273,40 @@ h2 {
   overflow: hidden;
   box-shadow: var(--shadow);
   z-index: 1;
+  animation: 
+    hero-card-entrance 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) both,
+    hero-card-float 6s ease-in-out infinite 1.2s;
 }
 
-.hero-media-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.hero-price {
+  animation: hero-price-entrance 1s cubic-bezier(0.2, 0.8, 0.2, 1) both 0.4s;
+}
+
+@keyframes hero-card-entrance {
+  from {
+    opacity: 0;
+    transform: translateX(40px) rotateY(-10deg) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotateY(0) scale(1);
+  }
+}
+
+@keyframes hero-price-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .hero-action-badge {
