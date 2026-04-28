@@ -1043,19 +1043,20 @@ h2 {
 
 .novaposhta-card ul li::before {
   color: var(--bg);
-  background: #000000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: #b40f15;
+  box-shadow: 0 4px 10px rgba(180, 15, 21, 0.3);
 }
 
 .novaposhta-card .btn {
-  background-color: var(--accent);
+  background-color: #b40f15;
   color: var(--bg);
-  border-color: var(--accent);
+  border-color: #b40f15;
 }
 
 .novaposhta-card .btn:hover {
-  background-color: var(--accent-hover);
+  background-color: #8f0b10;
   color: var(--bg);
+  border-color: #8f0b10;
 }
 
 .ukrposhta-card {
@@ -1064,7 +1065,8 @@ h2 {
 }
 
 .ukrposhta-card h3 {
-  color: #0033a0;
+  color: #ffb300;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .ukrposhta-card ul li {
@@ -1072,21 +1074,22 @@ h2 {
 }
 
 .ukrposhta-card ul li::before {
-  color: var(--bg);
-  background: #333333;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: var(--text);
+  background: #ffcc00;
+  box-shadow: 0 4px 10px rgba(255, 204, 0, 0.4);
 }
 
 .ukrposhta-card .btn {
-  background-color: var(--accent-2);
-  color: var(--bg);
-  border-color: var(--accent-2);
+  background-color: #ffcc00;
+  color: var(--text);
+  border-color: #ffcc00;
+  font-weight: 700;
 }
 
 .ukrposhta-card .btn:hover {
-  background-color: var(--text);
-  color: var(--bg);
-  border-color: var(--text);
+  background-color: #e6b800;
+  color: var(--text);
+  border-color: #e6b800;
 }
 
 .partner-cta {
