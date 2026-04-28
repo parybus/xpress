@@ -135,7 +135,7 @@ body {
   position: relative;
   padding: clamp(96px, 12vw, 130px) 0 44px;
   overflow: hidden;
-  background: linear-gradient(to left, #ffffff 56%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 0.3) 100%), url('assets/hero.webp') left/contain no-repeat;
+  background: linear-gradient(to left, #f1f1f1 56%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 0.3) 100%), url('assets/hero.webp') left/contain no-repeat;
 }
 
 .hero::after {
@@ -277,7 +277,6 @@ h2 {
 
 .lead {
   font-size: clamp(1.1rem, 1.8vw, 1.2rem);
-  color: var(--muted);
   max-width: 52ch;
 }
 
@@ -718,7 +717,7 @@ h2 {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.86);
   text-align: center;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
 }
@@ -760,7 +759,7 @@ h2 {
 }
 
 .new-price {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.86);
 }
 
 .new-price .price-label,
@@ -1547,7 +1546,7 @@ h2 {
   }
 
   .hero {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.95) 50%, #ffffff 100%), url('assets/hero.webp') top center/cover no-repeat;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.95) 30%, #ffffff 100%), url('assets/hero.webp') top center/contain no-repeat;
   }
 
   .hero-grid {
@@ -1713,7 +1712,7 @@ h2 {
   }
 
   .hero {
-    padding-top: 36px;
+    padding-top: 140px;
   }
 
   .features {
