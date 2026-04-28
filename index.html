@@ -449,6 +449,7 @@
           </ul>
         </div>
         <div class="confidence-media">
+          <canvas id="helps-wavy-mascara-canvas"></canvas>
           <img src="assets/before_after.png" alt="Миттєве вдосконалення погляду" />
           <a class="media-accent" href="#order">Зробіть свій погляд незабутнім</a>
         </div>
@@ -1218,6 +1219,99 @@
         }, { threshold: 0.1 });
         
         bwObserver.observe(bottomWavyCanvas);
+      }
+
+      // Helps Wavy Mascara Animation for second confidence-media
+      const helpsWavyCanvas = document.getElementById("helps-wavy-mascara-canvas");
+      if (helpsWavyCanvas) {
+        const hwCtx = helpsWavyCanvas.getContext("2d");
+        let hww, hwh;
+        const hwResize = () => {
+          hww = helpsWavyCanvas.width = helpsWavyCanvas.offsetWidth * window.devicePixelRatio;
+          hwh = helpsWavyCanvas.height = helpsWavyCanvas.offsetHeight * window.devicePixelRatio;
+          hwCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        };
+        window.addEventListener("resize", hwResize);
+        hwResize();
+
+        let helpsWavyProgress = 0;
+        let helpsWavyAnimationId;
+        let isHelpsWavyVisible = false;
+
+        let hwBristles = [];
+        function generateHWBristles() {
+          hwBristles = [];
+          const hwIsMobile = window.innerWidth < 768;
+          const thickness = ((hwIsMobile ? 20 : 35) + Math.random() * (hwIsMobile ? 20 : 45)) * 0.6;
+          const numBristles = (hwIsMobile ? 8 : 15) + Math.floor(Math.random() * (hwIsMobile ? 10 : 20));
+          for (let i = 0; i < numBristles; i++) {
+            hwBristles.push({
+              ox: (Math.random() - 0.5) * thickness,
+              oy: (Math.random() - 0.5) * thickness,
+              t: 1 + Math.random() * 4, 
+              a: 0.1 + Math.random() * 0.3 
+            });
+          }
+        }
+        generateHWBristles();
+
+        function animateHelpsWavy() {
+          if (!isHelpsWavyVisible) return;
+          hwCtx.clearRect(0, 0, helpsWavyCanvas.width, helpsWavyCanvas.height);
+          
+          helpsWavyProgress += 0.025; 
+          if (helpsWavyProgress > Math.PI * 2 + 4.0) { 
+            helpsWavyProgress = 0;
+            generateHWBristles(); 
+          }
+          
+          const maxT = Math.PI * 2; 
+          const drawnT = Math.min(helpsWavyProgress, maxT);
+          
+          // Draw from right to left
+          const startX = helpsWavyCanvas.offsetWidth - 10;
+          const startY = helpsWavyCanvas.offsetHeight / 2;
+          const endX = 10;
+
+          if (drawnT > 0) {
+            for (let b of hwBristles) {
+              hwCtx.beginPath();
+              for (let t = 0; t <= drawnT; t += 0.1) {
+                let normT = t / maxT;
+                let x = startX + (endX - startX) * normT;
+                let y = startY + Math.sin(normT * Math.PI * 3) * 15; 
+                
+                if (t === 0) hwCtx.moveTo(x + b.ox, y + b.oy);
+                else hwCtx.lineTo(x + b.ox, y + b.oy);
+              }
+              const fade = helpsWavyProgress > maxT ? Math.max(0, 1 - (helpsWavyProgress - maxT) / 1.5) : 1;
+              hwCtx.strokeStyle = `rgba(15, 10, 10, ${b.a * fade})`;
+              hwCtx.lineWidth = b.t;
+              hwCtx.lineCap = 'round';
+              hwCtx.lineJoin = 'round';
+              hwCtx.stroke();
+            }
+          }
+
+          helpsWavyAnimationId = requestAnimationFrame(animateHelpsWavy);
+        }
+
+        const hwObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              if (!isHelpsWavyVisible) {
+                isHelpsWavyVisible = true;
+                helpsWavyProgress = 0;
+                animateHelpsWavy();
+              }
+            } else {
+              isHelpsWavyVisible = false;
+              if (helpsWavyAnimationId) cancelAnimationFrame(helpsWavyAnimationId);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        hwObserver.observe(helpsWavyCanvas);
       }
     });
   </script>

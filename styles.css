@@ -1426,7 +1426,8 @@ h2 {
   position: relative;
 }
 
-#bottom-wavy-mascara-canvas {
+#bottom-wavy-mascara-canvas,
+#helps-wavy-mascara-canvas {
   position: absolute;
   bottom: 10px;
   left: 20px;
