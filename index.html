@@ -213,6 +213,7 @@
     <section class="benefits-section" id="benefits">
       <div class="benefits-grid container">
         <div class="benefits-media">
+          <canvas id="wavy-mascara-canvas"></canvas>
           <img src="assets/img.webp" alt="Результат до та після Vibely 4D" />
         </div>
         <div class="benefits-content">
@@ -939,6 +940,99 @@
         }, { threshold: 0.1 });
         
         cObserver.observe(circleCanvas);
+      }
+
+      // Wavy Mascara Animation for benefits-media
+      const wavyCanvas = document.getElementById("wavy-mascara-canvas");
+      if (wavyCanvas) {
+        const wCtx = wavyCanvas.getContext("2d");
+        let ww, wh;
+        const wResize = () => {
+          ww = wavyCanvas.width = wavyCanvas.offsetWidth * window.devicePixelRatio;
+          wh = wavyCanvas.height = wavyCanvas.offsetHeight * window.devicePixelRatio;
+          wCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        };
+        window.addEventListener("resize", wResize);
+        wResize();
+
+        let wavyProgress = 0;
+        let wavyAnimationId;
+        let isWavyVisible = false;
+
+        let wBristles = [];
+        function generateWBristles() {
+          wBristles = [];
+          const wIsMobile = window.innerWidth < 768;
+          const thickness = ((wIsMobile ? 20 : 35) + Math.random() * (wIsMobile ? 20 : 45)) * 0.6;
+          const numBristles = (wIsMobile ? 8 : 15) + Math.floor(Math.random() * (wIsMobile ? 10 : 20));
+          for (let i = 0; i < numBristles; i++) {
+            wBristles.push({
+              ox: (Math.random() - 0.5) * thickness,
+              oy: (Math.random() - 0.5) * thickness,
+              t: 1 + Math.random() * 4, 
+              a: 0.1 + Math.random() * 0.3 
+            });
+          }
+        }
+        generateWBristles();
+
+        function animateWavy() {
+          if (!isWavyVisible) return;
+          wCtx.clearRect(0, 0, wavyCanvas.width, wavyCanvas.height);
+          
+          wavyProgress += 0.015; 
+          if (wavyProgress > Math.PI * 2 + 4.0) { 
+            wavyProgress = 0;
+            generateWBristles(); 
+          }
+          
+          const maxT = Math.PI * 2; 
+          const drawnT = Math.min(wavyProgress, maxT);
+          
+          const startX = 10;
+          const startY = 30;
+          const endX = wavyCanvas.offsetWidth - 10;
+          const endY = wavyCanvas.offsetHeight - 30;
+
+          if (drawnT > 0) {
+            for (let b of wBristles) {
+              wCtx.beginPath();
+              for (let t = 0; t <= drawnT; t += 0.1) {
+                let normT = t / maxT;
+                let x = startX + (endX - startX) * normT;
+                let y = startY + (endY - startY) * normT + Math.sin(normT * Math.PI * 3.5) * 20; 
+                
+                if (t === 0) wCtx.moveTo(x + b.ox, y + b.oy);
+                else wCtx.lineTo(x + b.ox, y + b.oy);
+              }
+              const fade = wavyProgress > maxT ? Math.max(0, 1 - (wavyProgress - maxT) / 1.5) : 1;
+              wCtx.strokeStyle = `rgba(15, 10, 10, ${b.a * fade})`;
+              wCtx.lineWidth = b.t;
+              wCtx.lineCap = 'round';
+              wCtx.lineJoin = 'round';
+              wCtx.stroke();
+            }
+          }
+
+          wavyAnimationId = requestAnimationFrame(animateWavy);
+        }
+
+        const wObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              if (!isWavyVisible) {
+                isWavyVisible = true;
+                wavyProgress = 0;
+                animateWavy();
+              }
+            } else {
+              isWavyVisible = false;
+              if (wavyAnimationId) cancelAnimationFrame(wavyAnimationId);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        wObserver.observe(wavyCanvas);
       }
     });
   </script>
