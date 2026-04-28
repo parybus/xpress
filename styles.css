@@ -198,11 +198,14 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  background: #ffffff;
-  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 24px;
   padding: 12px 24px;
   margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
   animation: slide-down-fade 0.6s ease-out;
 }
 
@@ -712,8 +715,12 @@ h2 {
   border-radius: 999px;
   overflow: hidden;
   margin-bottom: 24px;
-  border: 1px solid var(--stroke);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
 }
 
 .price-item {
@@ -737,7 +744,7 @@ h2 {
 }
 
 .old-price {
-  background: var(--surface);
+  background: transparent;
 }
 
 .old-price .price-label,
@@ -753,7 +760,7 @@ h2 {
 }
 
 .new-price {
-  background: var(--accent-2);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .new-price .price-label,
@@ -1045,12 +1052,14 @@ h2 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--surface);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   width: 84px;
   height: 84px;
   border-radius: 50%;
-  border: 1px solid var(--stroke);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03);
 }
 
 .time-block span:first-child {
