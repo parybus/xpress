@@ -1426,6 +1426,16 @@ h2 {
   position: relative;
 }
 
+#bottom-wavy-mascara-canvas {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  width: calc(100% - 40px);
+  height: 80px;
+  z-index: 10;
+  pointer-events: none;
+}
+
 .confidence-media img {
   width: 100%;
   border-radius: 30px;

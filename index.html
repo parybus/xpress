@@ -377,6 +377,7 @@
     <section class="confidence-section" id="confidence">
       <div class="container confidence-grid">
         <div class="confidence-media">
+          <canvas id="bottom-wavy-mascara-canvas"></canvas>
           <img src="assets/v-6.webp" alt="Впевнена у собі" />
           <a class="media-accent" href="#order">Секрет ідеального погляду</a>
         </div>
@@ -1125,6 +1126,98 @@
         }, { threshold: 0.1 });
         
         hObserver.observe(heartCanvas);
+      }
+
+      // Bottom Wavy Mascara Animation for confidence-media
+      const bottomWavyCanvas = document.getElementById("bottom-wavy-mascara-canvas");
+      if (bottomWavyCanvas) {
+        const bwCtx = bottomWavyCanvas.getContext("2d");
+        let bww, bwh;
+        const bwResize = () => {
+          bww = bottomWavyCanvas.width = bottomWavyCanvas.offsetWidth * window.devicePixelRatio;
+          bwh = bottomWavyCanvas.height = bottomWavyCanvas.offsetHeight * window.devicePixelRatio;
+          bwCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        };
+        window.addEventListener("resize", bwResize);
+        bwResize();
+
+        let bottomWavyProgress = 0;
+        let bottomWavyAnimationId;
+        let isBottomWavyVisible = false;
+
+        let bwBristles = [];
+        function generateBWBristles() {
+          bwBristles = [];
+          const bwIsMobile = window.innerWidth < 768;
+          const thickness = ((bwIsMobile ? 20 : 35) + Math.random() * (bwIsMobile ? 20 : 45)) * 0.6;
+          const numBristles = (bwIsMobile ? 8 : 15) + Math.floor(Math.random() * (bwIsMobile ? 10 : 20));
+          for (let i = 0; i < numBristles; i++) {
+            bwBristles.push({
+              ox: (Math.random() - 0.5) * thickness,
+              oy: (Math.random() - 0.5) * thickness,
+              t: 1 + Math.random() * 4, 
+              a: 0.1 + Math.random() * 0.3 
+            });
+          }
+        }
+        generateBWBristles();
+
+        function animateBottomWavy() {
+          if (!isBottomWavyVisible) return;
+          bwCtx.clearRect(0, 0, bottomWavyCanvas.width, bottomWavyCanvas.height);
+          
+          bottomWavyProgress += 0.025; 
+          if (bottomWavyProgress > Math.PI * 2 + 4.0) { 
+            bottomWavyProgress = 0;
+            generateBWBristles(); 
+          }
+          
+          const maxT = Math.PI * 2; 
+          const drawnT = Math.min(bottomWavyProgress, maxT);
+          
+          const startX = 10;
+          const startY = bottomWavyCanvas.offsetHeight / 2;
+          const endX = bottomWavyCanvas.offsetWidth - 10;
+
+          if (drawnT > 0) {
+            for (let b of bwBristles) {
+              bwCtx.beginPath();
+              for (let t = 0; t <= drawnT; t += 0.1) {
+                let normT = t / maxT;
+                let x = startX + (endX - startX) * normT;
+                let y = startY + Math.sin(normT * Math.PI * 3) * 15; 
+                
+                if (t === 0) bwCtx.moveTo(x + b.ox, y + b.oy);
+                else bwCtx.lineTo(x + b.ox, y + b.oy);
+              }
+              const fade = bottomWavyProgress > maxT ? Math.max(0, 1 - (bottomWavyProgress - maxT) / 1.5) : 1;
+              bwCtx.strokeStyle = `rgba(15, 10, 10, ${b.a * fade})`;
+              bwCtx.lineWidth = b.t;
+              bwCtx.lineCap = 'round';
+              bwCtx.lineJoin = 'round';
+              bwCtx.stroke();
+            }
+          }
+
+          bottomWavyAnimationId = requestAnimationFrame(animateBottomWavy);
+        }
+
+        const bwObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              if (!isBottomWavyVisible) {
+                isBottomWavyVisible = true;
+                bottomWavyProgress = 0;
+                animateBottomWavy();
+              }
+            } else {
+              isBottomWavyVisible = false;
+              if (bottomWavyAnimationId) cancelAnimationFrame(bottomWavyAnimationId);
+            }
+          });
+        }, { threshold: 0.1 });
+        
+        bwObserver.observe(bottomWavyCanvas);
       }
     });
   </script>
