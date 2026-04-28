@@ -754,10 +754,11 @@
           this.decay = 0.002 + Math.random() * 0.004;
           this.delay = 0;
 
-          this.thickness = 35 + Math.random() * 45; // Збільшена ширина мазка
+          const isMobile = window.innerWidth < 768;
+          this.thickness = (isMobile ? 20 : 35) + Math.random() * (isMobile ? 20 : 45); 
 
           this.bristles = [];
-          const numBristles = 15 + Math.floor(Math.random() * 20); // Більше ворсинок для заповнення широкого мазка
+          const numBristles = (isMobile ? 8 : 15) + Math.floor(Math.random() * (isMobile ? 10 : 20));
           for (let i = 0; i < numBristles; i++) {
             this.bristles.push({
               ox: (Math.random() - 0.5) * this.thickness,
@@ -815,20 +816,40 @@
         }
       }
 
+      const isMobile = window.innerWidth < 768;
+      const numStrokes = isMobile ? 2 : 5;
       const strokes = [];
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < numStrokes; i++) {
         strokes.push(new MascaraStroke());
       }
 
+      let animationId;
+      let isVisible = false;
+
       function animate() {
+        if (!isVisible) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let stroke of strokes) {
           stroke.draw(ctx);
         }
-        requestAnimationFrame(animate);
+        animationId = requestAnimationFrame(animate);
       }
 
-      animate();
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!isVisible) {
+              isVisible = true;
+              animate();
+            }
+          } else {
+            isVisible = false;
+            if (animationId) cancelAnimationFrame(animationId);
+          }
+        });
+      }, { threshold: 0 });
+      
+      observer.observe(document.querySelector('.hero'));
     });
   </script>
 </body>
