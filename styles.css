@@ -1533,6 +1533,16 @@ h2 {
   align-items: center;
 }
 
+#heart-mascara-canvas {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 140px;
+  height: 140px;
+  z-index: 10;
+  pointer-events: none;
+}
+
 .size-guide-media img {
   width: 100%;
   border-radius: 30px;
