@@ -1516,6 +1516,8 @@ h2 {
   width: 100%;
   border-radius: 30px;
   box-shadow: var(--shadow);
+  object-fit: cover;
+  aspect-ratio: 16 / 12;
 }
 
 .be-ideal-section {
