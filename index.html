@@ -27,6 +27,7 @@
 
   <main id="home">
     <section class="hero">
+      <canvas id="mascara-canvas"></canvas>
       <h1 class="hero-mobile-title container">Vibely 4D Xpress Control</h1>
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -707,6 +708,129 @@
       </div>
     </div>
   </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("mascara-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      let w, h;
+      const resize = () => {
+        w = canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+        h = canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      };
+      window.addEventListener("resize", resize);
+      resize();
+
+      class MascaraStroke {
+        constructor() {
+          this.reset();
+          this.delay = Math.random() * 100;
+        }
+
+        reset() {
+          const canvasW = canvas.offsetWidth;
+          const canvasH = canvas.offsetHeight;
+          
+          if (Math.random() > 0.5) {
+            this.sx = Math.random() < 0.5 ? -100 : canvasW + 100;
+            this.sy = Math.random() * canvasH;
+          } else {
+            this.sx = Math.random() * canvasW;
+            this.sy = Math.random() < 0.5 ? -100 : canvasH + 100;
+          }
+
+          this.c1x = this.sx + (Math.random() - 0.5) * 600;
+          this.c1y = this.sy + (Math.random() - 0.5) * 600;
+          this.c2x = this.c1x + (Math.random() - 0.5) * 600;
+          this.c2y = this.c1y + (Math.random() - 0.5) * 600;
+          this.ex = this.c2x + (Math.random() - 0.5) * 600;
+          this.ey = this.c2y + (Math.random() - 0.5) * 600;
+
+          this.progress = 0;
+          this.speed = 0.004 + Math.random() * 0.008;
+          this.life = 1.0;
+          this.decay = 0.002 + Math.random() * 0.004;
+          this.delay = 0;
+
+          this.thickness = 35 + Math.random() * 45; // Збільшена ширина мазка
+
+          this.bristles = [];
+          const numBristles = 15 + Math.floor(Math.random() * 20); // Більше ворсинок для заповнення широкого мазка
+          for (let i = 0; i < numBristles; i++) {
+            this.bristles.push({
+              ox: (Math.random() - 0.5) * this.thickness,
+              oy: (Math.random() - 0.5) * this.thickness,
+              t: 2 + Math.random() * 8, // Товстіші окремі лінії
+              a: 0.1 + Math.random() * 0.3 // Трохи менша прозорість окремих ліній, бо їх стало більше
+            });
+          }
+
+          this.points = [];
+          const steps = 60;
+          for (let i = 0; i <= steps; i++) {
+            let t = i / steps;
+            let mt = 1 - t;
+            let x = mt * mt * mt * this.sx + 3 * mt * mt * t * this.c1x + 3 * mt * t * t * this.c2x + t * t * t * this.ex;
+            let y = mt * mt * mt * this.sy + 3 * mt * mt * t * this.c1y + 3 * mt * t * t * this.c2y + t * t * t * this.ey;
+            this.points.push({ x, y });
+          }
+        }
+
+        draw(ctx) {
+          if (this.delay > 0) {
+            this.delay--;
+            return true;
+          }
+
+          if (this.progress < 1) {
+            this.progress += this.speed;
+          } else {
+            this.life -= this.decay;
+          }
+
+          if (this.life <= 0) {
+            this.reset();
+            this.delay = 60 + Math.random() * 120; // 1-2 seconds delay before next stroke
+            return false;
+          }
+
+          const currentSteps = Math.floor(this.progress * 60);
+          if (currentSteps === 0) return true;
+
+          for (let b of this.bristles) {
+            ctx.beginPath();
+            ctx.moveTo(this.points[0].x + b.ox, this.points[0].y + b.oy);
+            for (let i = 1; i <= currentSteps; i++) {
+              ctx.lineTo(this.points[i].x + b.ox, this.points[i].y + b.oy);
+            }
+            ctx.strokeStyle = `rgba(15, 10, 10, ${b.a * this.life})`;
+            ctx.lineWidth = b.t;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+          }
+          return true;
+        }
+      }
+
+      const strokes = [];
+      for (let i = 0; i < 5; i++) {
+        strokes.push(new MascaraStroke());
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let stroke of strokes) {
+          stroke.draw(ctx);
+        }
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+    });
+  </script>
 </body>
 
 </html>
