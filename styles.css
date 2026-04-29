@@ -18,14 +18,18 @@
   box-sizing: border-box;
 }
 
-html,
-body {
+html {
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
 body {
+  margin: 0;
+  padding: 72px 0 0 0;
+  overflow-x: hidden;
+  width: 100%;
   font-family: Manrope, "Segoe UI", sans-serif;
   color: var(--text);
   background:
@@ -41,13 +45,18 @@ body {
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 20;
-  backdrop-filter: blur(8px);
-  background: rgba(248, 244, 251, 0.16);
-  border-bottom: 1px solid rgba(216, 204, 232, 0.6);
-  margin-bottom: -73px;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .header-wrap {
@@ -160,6 +169,7 @@ body {
   position: relative;
   padding: clamp(96px, 12vw, 130px) 0 44px;
   overflow: hidden;
+  margin-top: -64px;
   background: linear-gradient(to left, #f1f1f1 56%, rgba(255, 255, 255, 0.9) 70%, rgba(255, 255, 255, 0.3) 100%), url('assets/hero.webp') left/contain no-repeat;
 }
 
