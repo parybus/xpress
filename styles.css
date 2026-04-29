@@ -1863,6 +1863,10 @@ h2 {
     text-align: center;
   }
 
+  .card-photo {
+    filter: brightness(0.6);
+  }
+
   .hero-actions .btn-pulse {
     width: 100%;
   }

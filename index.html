@@ -87,7 +87,7 @@
             <div class="hero-action-badge">Акція</div>
             <div class="card-content">
               <img class="card-photo" src="assets/img.jpg" alt="Vibely 4D Mascara" />
-              <p>Ефект 4D об'єму</p>
+              <p>Туш 4D об'єму</p>
             </div>
           </a>
           <div class="price-banner hero-price">
@@ -883,8 +883,8 @@
             bristles.push({
               ox: (Math.random() - 0.5) * thickness,
               oy: (Math.random() - 0.5) * thickness,
-              t: 1 + Math.random() * 4, 
-              a: 0.1 + Math.random() * 0.3 
+              t: 1 + Math.random() * 4,
+              a: 0.1 + Math.random() * 0.3
             });
           }
         }
@@ -893,16 +893,16 @@
         function animateCircle() {
           if (!isCircleVisible) return;
           cCtx.clearRect(0, 0, circleCanvas.width, circleCanvas.height);
-          
-          circleProgress += 0.025; 
-          if (circleProgress > Math.PI * 2 + 4.0) { 
+
+          circleProgress += 0.025;
+          if (circleProgress > Math.PI * 2 + 4.0) {
             circleProgress = 0;
-            generateBristles(); 
+            generateBristles();
           }
-          
+
           const cx = circleCanvas.offsetWidth / 2;
           const cy = circleCanvas.offsetHeight / 2;
-          const radius = Math.min(cx, cy) - 15; 
+          const radius = Math.min(cx, cy) - 15;
           const drawnAngle = Math.min(circleProgress, Math.PI * 2);
 
           if (drawnAngle > 0) {
@@ -910,7 +910,7 @@
               cCtx.beginPath();
               for (let a = 0; a <= drawnAngle; a += 0.05) {
                 let r = radius;
-                let x = cx + Math.cos(a - Math.PI / 2) * r; 
+                let x = cx + Math.cos(a - Math.PI / 2) * r;
                 let y = cy + Math.sin(a - Math.PI / 2) * r;
                 if (a === 0) cCtx.moveTo(x + b.ox, y + b.oy);
                 else cCtx.lineTo(x + b.ox, y + b.oy);
@@ -941,7 +941,7 @@
             }
           });
         }, { threshold: 0.1 });
-        
+
         cObserver.observe(circleCanvas);
       }
 
@@ -972,8 +972,8 @@
             wBristles.push({
               ox: (Math.random() - 0.5) * thickness,
               oy: (Math.random() - 0.5) * thickness,
-              t: 1 + Math.random() * 4, 
-              a: 0.1 + Math.random() * 0.3 
+              t: 1 + Math.random() * 4,
+              a: 0.1 + Math.random() * 0.3
             });
           }
         }
@@ -982,16 +982,16 @@
         function animateWavy() {
           if (!isWavyVisible) return;
           wCtx.clearRect(0, 0, wavyCanvas.width, wavyCanvas.height);
-          
-          wavyProgress += 0.025; 
-          if (wavyProgress > Math.PI * 2 + 4.0) { 
+
+          wavyProgress += 0.025;
+          if (wavyProgress > Math.PI * 2 + 4.0) {
             wavyProgress = 0;
-            generateWBristles(); 
+            generateWBristles();
           }
-          
-          const maxT = Math.PI * 2; 
+
+          const maxT = Math.PI * 2;
           const drawnT = Math.min(wavyProgress, maxT);
-          
+
           const startX = 10;
           const startY = 30;
           const endX = wavyCanvas.offsetWidth - 10;
@@ -1003,8 +1003,8 @@
               for (let t = 0; t <= drawnT; t += 0.1) {
                 let normT = t / maxT;
                 let x = startX + (endX - startX) * normT;
-                let y = startY + (endY - startY) * normT + Math.sin(normT * Math.PI * 1.5) * 6; 
-                
+                let y = startY + (endY - startY) * normT + Math.sin(normT * Math.PI * 1.5) * 6;
+
                 if (t === 0) wCtx.moveTo(x + b.ox, y + b.oy);
                 else wCtx.lineTo(x + b.ox, y + b.oy);
               }
@@ -1034,7 +1034,7 @@
             }
           });
         }, { threshold: 0.1 });
-        
+
         wObserver.observe(wavyCanvas);
       }
 
@@ -1065,8 +1065,8 @@
             hBristles.push({
               ox: (Math.random() - 0.5) * thickness,
               oy: (Math.random() - 0.5) * thickness,
-              t: 1 + Math.random() * 4, 
-              a: 0.1 + Math.random() * 0.3 
+              t: 1 + Math.random() * 4,
+              a: 0.1 + Math.random() * 0.3
             });
           }
         }
@@ -1075,27 +1075,27 @@
         function animateHeart() {
           if (!isHeartVisible) return;
           hCtx.clearRect(0, 0, heartCanvas.width, heartCanvas.height);
-          
-          heartProgress += 0.025; 
-          if (heartProgress > Math.PI * 2 + 4.0) { 
+
+          heartProgress += 0.025;
+          if (heartProgress > Math.PI * 2 + 4.0) {
             heartProgress = 0;
-            generateHBristles(); 
+            generateHBristles();
           }
-          
-          const maxT = Math.PI * 2; 
+
+          const maxT = Math.PI * 2;
           const drawnAngle = Math.min(heartProgress, maxT);
-          
+
           const cx = heartCanvas.offsetWidth / 2;
-          const cy = heartCanvas.offsetHeight / 2 - 5; 
-          const scale = 3.2; 
+          const cy = heartCanvas.offsetHeight / 2 - 5;
+          const scale = 3.2;
 
           if (drawnAngle > 0) {
             for (let b of hBristles) {
               hCtx.beginPath();
               for (let a = 0; a <= drawnAngle; a += 0.05) {
                 let x = cx + 16 * Math.pow(Math.sin(a), 3) * scale;
-                let y = cy - (13 * Math.cos(a) - 5 * Math.cos(2*a) - 2 * Math.cos(3*a) - Math.cos(4*a)) * scale;
-                
+                let y = cy - (13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a)) * scale;
+
                 if (a === 0) hCtx.moveTo(x + b.ox, y + b.oy);
                 else hCtx.lineTo(x + b.ox, y + b.oy);
               }
@@ -1125,7 +1125,7 @@
             }
           });
         }, { threshold: 0.1 });
-        
+
         hObserver.observe(heartCanvas);
       }
 
@@ -1156,8 +1156,8 @@
             bwBristles.push({
               ox: (Math.random() - 0.5) * thickness,
               oy: (Math.random() - 0.5) * thickness,
-              t: 1 + Math.random() * 4, 
-              a: 0.1 + Math.random() * 0.3 
+              t: 1 + Math.random() * 4,
+              a: 0.1 + Math.random() * 0.3
             });
           }
         }
@@ -1166,16 +1166,16 @@
         function animateBottomWavy() {
           if (!isBottomWavyVisible) return;
           bwCtx.clearRect(0, 0, bottomWavyCanvas.width, bottomWavyCanvas.height);
-          
-          bottomWavyProgress += 0.025; 
-          if (bottomWavyProgress > Math.PI * 2 + 4.0) { 
+
+          bottomWavyProgress += 0.025;
+          if (bottomWavyProgress > Math.PI * 2 + 4.0) {
             bottomWavyProgress = 0;
-            generateBWBristles(); 
+            generateBWBristles();
           }
-          
-          const maxT = Math.PI * 2; 
+
+          const maxT = Math.PI * 2;
           const drawnT = Math.min(bottomWavyProgress, maxT);
-          
+
           const startX = 10;
           const startY = bottomWavyCanvas.offsetHeight / 2;
           const endX = bottomWavyCanvas.offsetWidth - 10;
@@ -1186,8 +1186,8 @@
               for (let t = 0; t <= drawnT; t += 0.1) {
                 let normT = t / maxT;
                 let x = startX + (endX - startX) * normT;
-                let y = startY + Math.sin(normT * Math.PI * 3) * 15; 
-                
+                let y = startY + Math.sin(normT * Math.PI * 3) * 15;
+
                 if (t === 0) bwCtx.moveTo(x + b.ox, y + b.oy);
                 else bwCtx.lineTo(x + b.ox, y + b.oy);
               }
@@ -1217,7 +1217,7 @@
             }
           });
         }, { threshold: 0.1 });
-        
+
         bwObserver.observe(bottomWavyCanvas);
       }
 
@@ -1248,8 +1248,8 @@
             hwBristles.push({
               ox: (Math.random() - 0.5) * thickness,
               oy: (Math.random() - 0.5) * thickness,
-              t: 1 + Math.random() * 4, 
-              a: 0.1 + Math.random() * 0.3 
+              t: 1 + Math.random() * 4,
+              a: 0.1 + Math.random() * 0.3
             });
           }
         }
@@ -1258,16 +1258,16 @@
         function animateHelpsWavy() {
           if (!isHelpsWavyVisible) return;
           hwCtx.clearRect(0, 0, helpsWavyCanvas.width, helpsWavyCanvas.height);
-          
-          helpsWavyProgress += 0.025; 
-          if (helpsWavyProgress > Math.PI * 2 + 4.0) { 
+
+          helpsWavyProgress += 0.025;
+          if (helpsWavyProgress > Math.PI * 2 + 4.0) {
             helpsWavyProgress = 0;
-            generateHWBristles(); 
+            generateHWBristles();
           }
-          
-          const maxT = Math.PI * 2; 
+
+          const maxT = Math.PI * 2;
           const drawnT = Math.min(helpsWavyProgress, maxT);
-          
+
           // Draw from right to left
           const startX = helpsWavyCanvas.offsetWidth - 10;
           const startY = helpsWavyCanvas.offsetHeight / 2;
@@ -1279,8 +1279,8 @@
               for (let t = 0; t <= drawnT; t += 0.1) {
                 let normT = t / maxT;
                 let x = startX + (endX - startX) * normT;
-                let y = startY + Math.sin(normT * Math.PI * 3) * 15; 
-                
+                let y = startY + Math.sin(normT * Math.PI * 3) * 15;
+
                 if (t === 0) hwCtx.moveTo(x + b.ox, y + b.oy);
                 else hwCtx.lineTo(x + b.ox, y + b.oy);
               }
@@ -1310,7 +1310,7 @@
             }
           });
         }, { threshold: 0.1 });
-        
+
         hwObserver.observe(helpsWavyCanvas);
       }
     });
